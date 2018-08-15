@@ -2,11 +2,11 @@ package sample;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 
 import javax.swing.*;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 
 public class Controller
 {
@@ -15,10 +15,14 @@ public class Controller
     private String[] RowLetters = {"A","B","C","D","E","F","G","H","I","J"};
     private Button[][] PlayerButtons = new Button[10][10];
     private Button[][] OpponentButtons = new Button[10][10];
+    public TextArea ChatTextArea = new TextArea();
+    public TextField ChatTextField = new TextField();
+    public Button ChatSendButton = new Button();
 
     public void StartGame()
     {
         AddLabels();
+        AddChat();
         for (int column = 0; column < 10; column++)
         {
             for(int row = 1; row < 11; row++)
@@ -47,6 +51,15 @@ public class Controller
                 OpponentButtons[row -1][column-11] = buttonToAdd;
             }
         }
+    }
+
+    private void AddChat()
+    {
+        ChatTextArea.setDisable(true);
+        ChatSendButton.setText("Send Chat");
+        BattleshipGridPane.add(ChatTextArea,0,11,21,4);
+        BattleshipGridPane.add(ChatTextField, 0, 15,21,2);
+        BattleshipGridPane.add(ChatSendButton, 18,17,4,1);
     }
 
     private void AddLabels()
