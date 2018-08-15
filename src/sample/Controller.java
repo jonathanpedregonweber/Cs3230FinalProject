@@ -1,6 +1,7 @@
 package sample;
 
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 
 import javax.swing.*;
@@ -17,34 +18,45 @@ public class Controller
 
     public void StartGame()
     {
+        AddLabels();
         for (int column = 0; column < 10; column++)
         {
-            for(int row = 0; row < 10; row++)
+            for(int row = 1; row < 11; row++)
             {
                 StartButton.setVisible(false);
                 Button buttonToAdd = new Button();
-                String buttonText = RowLetters[row]+ (column +1);
+                String buttonText = RowLetters[row - 1]+ (column +1);
                 buttonToAdd.setText(buttonText);
                 buttonToAdd.setDisable(true);
                 buttonToAdd.autosize();
                 BattleshipGridPane.add(new Button(),column,row);
-                PlayerButtons[row][column] = buttonToAdd;
+                PlayerButtons[row -1][column] = buttonToAdd;
             }
         }
 
         for (int column = 11; column < 21; column++)
         {
-            for(int row = 0; row < 10; row++)
+            for(int row = 1; row < 11; row++)
             {
                 Button buttonToAdd = new Button();
-                String buttonText = RowLetters[row]+ (column -9);
+                String buttonText = RowLetters[row -1]+ (column -9);
                 buttonToAdd.setText(buttonText);
                 buttonToAdd.setDisable(true);
                 buttonToAdd.autosize();
                 BattleshipGridPane.add(new Button(),column,row);
-                OpponentButtons[row][column-11] = buttonToAdd;
+                OpponentButtons[row -1][column-11] = buttonToAdd;
             }
         }
+    }
+
+    private void AddLabels()
+    {
+        Label playerLabel = new Label();
+        playerLabel.setText("Player Board");
+        Label opponentLabel = new Label();
+        opponentLabel.setText("Opponent Board");
+        BattleshipGridPane.add(playerLabel,0,0,10,1);
+        BattleshipGridPane.add(opponentLabel,11,0,10,1);
     }
 }
 
